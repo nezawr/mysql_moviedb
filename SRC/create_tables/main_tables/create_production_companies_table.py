@@ -10,15 +10,13 @@ cnx = mysql.connector.connect(
 
 cursor = cnx.cursor()
 
-#cursor.execute("DROP TABLE IF EXISTS movies")
+#cursor.execute("DROP TABLE IF EXISTS production_companies")
 #{"success":false,"status_code":34,"status_message":"The resource you requested could not be found."}
 
-sql = '''CREATE TABLE genres(
-    genreid INT, 
-    genre VARCHAR(250)
+sql = '''CREATE TABLE production_companies(
+    production_company_id INT NOT NULL PRIMARY KEY,
+    production_company VARCHAR(250)
 )'''
 
 cursor.execute(sql)
-
-
 cnx.close()

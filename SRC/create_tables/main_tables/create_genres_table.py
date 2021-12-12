@@ -10,17 +10,15 @@ cnx = mysql.connector.connect(
 
 cursor = cnx.cursor()
 
-#cursor.execute("DROP TABLE IF EXISTS movies")
+#cursor.execute("DROP TABLE IF EXISTS genres")
 #{"success":false,"status_code":34,"status_message":"The resource you requested could not be found."}
 
-sql = '''CREATE TABLE moviespokenlang(
-    id NOT NULL AUTO INCREMENT PRIMARY INT,
-    movieid INT,
-    spoken_languageid INT
+sql = '''CREATE TABLE genres(
+    genre_id INT NOT NULL PRIMARY KEY, 
+    genre VARCHAR(250)
 )'''
 
 cursor.execute(sql)
-cnx.close()
 
 
 cnx.close()
