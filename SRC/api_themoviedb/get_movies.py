@@ -14,6 +14,9 @@ cursor = cnx.cursor()
 
 ''' api_request = "https://api.themoviedb.org/3/movie/{movie_id}?api_key=dc5ea0a6055e40034e3a85d8c9c511b8&language=en-US" '''
 
+'''If movie_id does not exist, the API returns the following json response:
+
+{"success":false,"status_code":34,"status_message":"The resource you requested could not be found."}'''
 
 for movie_id in range(100,100000):
     print(f"ID:{movie_id}\n")
