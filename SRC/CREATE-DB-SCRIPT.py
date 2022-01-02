@@ -11,7 +11,29 @@ cnx = mysql.connector.connect(
 cursor = cnx.cursor()
 
 # MAIN TABLES - independent information
-cursor.execute("DROP TABLE IF EXISTS movies")
+#cursor.execute("DROP TABLE IF EXISTS movies")
+#cursor.execute("DROP TABLE IF EXISTS genres")
+#cursor.execute("DROP TABLE IF EXISTS production_companies")
+#cursor.execute("DROP TABLE IF EXISTS production_countries")
+#cursor.execute("DROP TABLE IF EXISTS spoken_languages")
+
+
+# CONNECTION TABLES - related information
+
+#cursor.execute("DROP TABLE IF EXISTS moviegenres")
+#cursor.execute("DROP TABLE IF EXISTS movieprodcompanies")
+#cursor.execute("DROP TABLE IF EXISTS movieprodcountries")
+#cursor.execute("DROP TABLE IF EXISTS moviespokenlanguages")
+
+'''
+cursor.execute("DROP TABLE IF EXISTS actors")
+cursor.execute("DROP TABLE IF EXISTS crew")
+cursor.execute("DROP TABLE IF EXISTS moviecrew")
+cursor.execute("DROP TABLE IF EXISTS movieactors")
+'''
+
+
+
 sqlmovies = '''CREATE TABLE movies(
     movie_id INT NOT NULL PRIMARY KEY,
     title VARCHAR(250),
@@ -31,7 +53,6 @@ sqlmovies = '''CREATE TABLE movies(
 cursor.execute(sqlmovies)
 
 
-cursor.execute("DROP TABLE IF EXISTS genres")
 sqlgenres = '''CREATE TABLE genres(
     genre_id INT NOT NULL PRIMARY KEY, 
     genre VARCHAR(250)
@@ -39,7 +60,7 @@ sqlgenres = '''CREATE TABLE genres(
 cursor.execute(sqlgenres)
 
 
-cursor.execute("DROP TABLE IF EXISTS production_companies")
+
 sqlproduction_companies = '''CREATE TABLE production_companies(
     production_company_id INT NOT NULL PRIMARY KEY,
     production_company VARCHAR(250)
@@ -47,7 +68,6 @@ sqlproduction_companies = '''CREATE TABLE production_companies(
 cursor.execute(sqlproduction_companies)
 
 
-cursor.execute("DROP TABLE IF EXISTS production_countries")
 sqlproduction_countries = '''CREATE TABLE production_countries(
     production_country_id VARCHAR(250) NOT NULL PRIMARY KEY,
     production_country VARCHAR(250)
@@ -55,7 +75,7 @@ sqlproduction_countries = '''CREATE TABLE production_countries(
 cursor.execute(sqlproduction_countries)
 
 
-cursor.execute("DROP TABLE IF EXISTS spoken_languages")
+
 sqlspoken_languages = '''CREATE TABLE spoken_languages(
     spoken_language_id VARCHAR(250) NOT NULL PRIMARY KEY,
     spoken_language VARCHAR(250)
@@ -63,9 +83,6 @@ sqlspoken_languages = '''CREATE TABLE spoken_languages(
 cursor.execute(sqlspoken_languages)
 
 
-# CONNECTION TABLES - related information
-
-cursor.execute("DROP TABLE IF EXISTS moviegenres")
 sqlmoviegenres = '''CREATE TABLE moviegenres(
     id INT AUTO_INCREMENT PRIMARY KEY,
     movie_id INT,
@@ -74,7 +91,7 @@ sqlmoviegenres = '''CREATE TABLE moviegenres(
 cursor.execute(sqlmoviegenres)
 
 
-cursor.execute("DROP TABLE IF EXISTS movieprodcompanies")
+
 sqlmovieprodcompanies = '''CREATE TABLE movieprodcompanies(
     id INT AUTO_INCREMENT PRIMARY KEY,
     movie_id INT,
@@ -83,7 +100,7 @@ sqlmovieprodcompanies = '''CREATE TABLE movieprodcompanies(
 cursor.execute(sqlmovieprodcompanies)
 
 
-cursor.execute("DROP TABLE IF EXISTS movieprodcountries")
+
 sqlmovieprodcountries = '''CREATE TABLE movieprodcountries(
     id INT AUTO_INCREMENT PRIMARY KEY,
     movie_id INT,
@@ -91,7 +108,7 @@ sqlmovieprodcountries = '''CREATE TABLE movieprodcountries(
 )'''
 cursor.execute(sqlmovieprodcountries)
 
-cursor.execute("DROP TABLE IF EXISTS moviespokenlanguages")
+
 sqlmoviespokenlanguages = '''CREATE TABLE moviespokenlanguages(
     id INT AUTO_INCREMENT PRIMARY KEY,
     movie_id INT,
@@ -99,12 +116,51 @@ sqlmoviespokenlanguages = '''CREATE TABLE moviespokenlanguages(
 )'''
 cursor.execute(sqlmoviespokenlanguages)
 
-cnx.close()
+
+# MAIN TABLES - independent information
 
 
+sqlactors = '''CREATE TABLE actors(
+    actor_id INT NOT NULL PRIMARY KEY,
+    name VARCHAR(250),
+    original_name VARCHAR(250),
+    known_for_department VARCHAR(250),
+    gender INT,
+    popularity INT
+)'''
+
+cursor.execute(sqlactors)
 
 
+sqlcrew = '''CREATE TABLE crew(
+    crew_id INT NOT NULL PRIMARY KEY,
+    name VARCHAR(250),
+    original_name VARCHAR(250),
+    known_for_department VARCHAR(250),
+    gender INT,
+    popularity INT
+)'''
+cursor.execute(sqlcrew)
 
+
+sqlmovieactors = '''CREATE TABLE movieactors(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    movie_id INT,
+    actor_id INT,
+    character_name VARCHAR(250)
+)'''
+cursor.execute(sqlmovieactors)
+
+
+sqlmoviecrew = '''CREATE TABLE moviecrew(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    movie_id INT,
+    crew_id INT,
+    department VARCHAR(250),
+    job VARCHAR(250)
+)'''
+
+cursor.execute(sqlmoviecrew)
 
 
 
