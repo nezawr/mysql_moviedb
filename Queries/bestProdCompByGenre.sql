@@ -1,4 +1,4 @@
-
+USE DbMysql01;
 SELECT bestProdCompByGenre.genre AS genre, bestProdCompByGenre.prodCompName AS production_company,
 		bestProdCompByGenre.occurrences AS CriteriaPassed
 FROM
@@ -18,4 +18,5 @@ FROM
 	WHERE genre.movie_id = prodComp.movie_id
 	GROUP BY genre, prodCompName
 	ORDER BY occurrences DESC) bestProdCompByGenre
-WHERE pc_rank <= 1;
+WHERE pc_rank <= 100
+	AND genre = "Drama";

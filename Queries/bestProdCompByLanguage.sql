@@ -11,7 +11,7 @@ FROM
 		AND movies.revenue - movies.budget >= 10000000) ProdByLanguage
 GROUP BY ol, pc
 ORDER BY occurrences DESC) bestProdByLanguage
-WHERE pc_rank <= 3;
+WHERE pc_rank <= 100;
 
 
 # ROW_NUMBER() OVER (PARTITION BY bestProdByLanguage.production_company, bestProdByLanguage.original_language ORDER BY count(*) DESC) as pc_rank
